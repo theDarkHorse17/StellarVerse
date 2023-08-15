@@ -60,12 +60,30 @@ const handleChat = () => {
     chatbox.scrollTo(0, chatbox.scrollHeight);
     
     setTimeout(() => {
-        
-        const incomingChatLi = createChatLi("Thinking...", "incoming");
+        const myStringArray = [
+            "Still en route through the cosmic lag...",
+            "Hitching a ride on the space-time delay express...",
+            "Navigating the time-warp, almost there...",
+            "Message en route, taking the scenic route through the cosmic lag...",
+            "Incoming wisdom from the future, courtesy of cosmic lag...",
+            "Signal cutting through the cosmic lag like a laser through fog...",
+            "Transmission unfolding through the cosmic lag, like a slow-motion supernova...",
+            "Cosmic lag? More like cosmic swag, as your message glides in gracefully...",
+            "Patience, dear friend, as your words surf the celestial tides of the cosmic lag...",
+            "Awaiting your words like an astronaut in stasis, traversing the cosmic lag...",
+            "Your message is like a comet on a leisurely journey through the cosmic lag..."
+        ];
+        function chooseRandomString(stringsArray) {
+            const randomIndex = Math.floor(Math.random() * stringsArray.length);
+            return stringsArray[randomIndex];
+        }
+        const incomingChatLi = createChatLi(chooseRandomString(myStringArray), "incoming");
         chatbox.appendChild(incomingChatLi);
         chatbox.scrollTo(0, chatbox.scrollHeight);
         generateResponse(incomingChatLi);
     }, 600);
+    
+    
 }
 
 chatInput.addEventListener("input", () => {
