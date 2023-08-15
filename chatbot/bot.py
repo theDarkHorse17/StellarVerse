@@ -3,7 +3,7 @@ import random
 
 class Rulebot:
 #-------------------------user section-----------------------------------#
-    negative_response=( 
+    negative_response=(
     "No",
     "No",
     "Nope",
@@ -29,7 +29,57 @@ class Rulebot:
     "No, that won't work",
     "No, that's not acceptable",
     )
-
+    positive_response= [
+    "Alright",
+    "Sure",
+    "Yup",
+    "Got it",
+    "Fine",
+    "Roger",
+    "Of course",
+    "Indeed",
+    "Absolutely",
+    "No problem",
+    "Okay",
+    "Affirmative",
+    "Right",
+    "You bet",
+    "All right",
+    "Okey-dokey",
+    "Sure thing",
+    "Absolutely",
+    "Perfect",
+    "True",
+    "Very well",
+    "Righto",
+    "Aye",
+    "Fine by me",
+    "Good",
+    "Sounds good",
+    "No worries",
+    "Certainly",
+    "A-okay",
+    "It's settled",
+    "You got it",
+    "All good",
+    "That works",
+    "OKie dokie",
+    "Alrighty",
+    "I agree",
+    "Affirmative",
+    "OK",
+    "Understood",
+    "Without a doubt",
+    "I'm on board",
+    "I'm in",
+    "That's fine",
+    "No doubt",
+    "Copy that",
+    "Yuppers",
+    "That's right",
+    "Deal",
+    "Consider it done"
+]
     negative_responses_user=[response.lower() for response in negative_response]
 
     exit_commands=(
@@ -56,6 +106,10 @@ class Rulebot:
     )
 
     make_exit_user=[response.lower() for response in exit_commands]
+
+    user_nichname=space_terms = ["Comet", "Nova", "Celestia", "Starlight", "Nebula", "Orion", "Galaxy", "Cosmo", "Astro", "Stellar"]
+    prefix = "Captain"
+
 
 #---------------------------bot section----------------------------------#
     botbye=[
@@ -111,7 +165,7 @@ class Rulebot:
     "Until we cross paths again, in the vastness of the universe"
 ]
 
-    bot_intro=( 
+    bot_intro=(
        "Welcome to our Stellar Verse, where stars come to life, guided by my adorable presence!",
     "Together, we'll unravel cosmic mysteries in Stellar Verse as I assist you as your cute robotic companion.",
     "In Stellar Verse, I'm your cosmic sanctuary, helping you explore all things astronomy with my charm.",
@@ -218,8 +272,22 @@ class Rulebot:
     "Let's embark on a cosmic pilgrimage to seek the universe's cosmic truths."
 ]
 
-#------------------------------------------------------------------------#    
+    bot_ass=[
+    "What can I do for you?",
+    "How can I assist you?",
+    "Is there something you need?",
+    "Can I help with anything?",
+    "Need any help?",
+    "How may I assist you?",
+    "Can I be of service?",
+    "What do you need?",
+    "Is there a way I can help?",
+    "What's your request?"
+]
+
+#------------------------------------------------------------------------#
     def greet(self):
+        self.intro=print("Hey "+self.prefix+random.choice(self.user_nichname)+"!!!\n")
         self.name=input("What is your name?\n")
         will_help=input(
             f"Hey {self.name},Nice to meet you,"+random.choice(self.bot_questio)+"\n"
@@ -234,16 +302,17 @@ class Rulebot:
             if reply==command:
                 print(random.choice(self.botbye)+"\n")
                 return True
-            
+
     def chat(self):
-        reply=input(random.choice(self.bot_intro)+"\n")
+        reply=input(random.choice(self.bot_intro)+"\n"+random.choice(self.bot_ass)+"\n")
         while not self.make_exit_user(reply):
             reply =input(self.match_reply(reply))
-    
-    
+
+
     def __init__(self):
         self.alienbabble = {
             'describe_website_intent': r'.*\s*website',
+
         }
 
     def match_reply(self, reply):
@@ -251,27 +320,36 @@ class Rulebot:
             found_match = re.match(regex_pattern, reply)
             if found_match and intent == "describe_website_intent":
                 return self.describe_website_intent()
-            
+
         return self.no_match_intent()
-                
-            
+
+    def bot_say(self):
+        responses={
+        "In-Depth Exploration of Space Topics:This intent involves offering users the opportunity to explore detailed information about various topics related to space, such as planetary science, astrophysics, cosmology, and more. It allows users to take a deep dive into the intricacies of space exploration.+\n",
+        "Appreciation of Celestial Beauty and Stargazing:This intent caters to individuals interested in the beauty of the night sky and celestial objects. Users can learn about constellations, their stories, and how to identify them in the night sky, enhancing their stargazing experiences.+\n",
+        "Visual Exploration through Stunning Space Images:This intent focuses on providing users with visually captivating images captured by space organizations, including space telescopes, rovers, and satellites. It allows users to appreciate the aesthetics and wonder of space through pictures.+\n",
+        "Interactive Assistance and Q&A:This intent involves providing users with an interactive virtual assistant or chatbot, such as Stella,which can answer questions, provide explanations, and offer guidance on various space-related topics. Users can seek information and clear doubts. all of them+\n"
+    }
+        responses=list(responses)
+        return responses
+
     def describe_website_intent(self):
         responses={
            "StellarVerse is your ultimate online destination for all things space-related. Whether you're a casual space enthusiast, an aspiring astronomer, or a dedicated astrophysicist, our website offers a comprehensive and engaging platform to explore and learn about the vast cosmos that surrounds us.\n\n",
-    
+
             "StellarVerse shines as the paramount online haven for everything related to space. Catering to the curious stargazer, the ambitious astronomer, and the passionate astrophysicist, our platform provides an encompassing and captivating avenue to delve into the boundless cosmos that envelops us.\n\n",
-    
+
              "Journey to the heart of cosmic understanding with StellarVerse, the quintessential online portal for space enthusiasts. Whether you're a casual observer of the night sky, an aspiring celestial scholar, or an unwavering explorer of the universe's depths, our platform is your comprehensive guide to unraveling the grandeur of the cosmos.\n\n",
-    
+
          "Prepare to embark on a celestial odyssey with StellarVerse, the virtual cosmos where all things space converge. Whether you're a starlit dreamer, a budding star whisperer, or an ardent cosmic inquirer, our platform opens the door to an immersive and enlightening journey through the vast expanse of the universe.\n\n",
-    
+
          "Welcome to StellarVerse, where the cosmos becomes your digital realm of discovery. Embracing the curiosity of the casual observer, the ambition of the burgeoning astronomer, and the fervor of the devoted astrophysicist, our platform offers an immersive and educational experience to explore the vast tapestry of space.",
 
         }
         responses = list(responses)
-        return random.choice(responses)
-        
-   
+        return random.choice(responses)+random.choice(self.bot_say())
+
+
 
     def no_match_intent(self):
         responses = [
@@ -298,7 +376,7 @@ class Rulebot:
     "Oh, the joy of uncovering hidden gems! Venture into the website and unearth the answer for a true adventure.",
     "Sure, I could spill the beans, but it's way more entertaining to let you discover the answer on the website."
 ]
-        return random.choice(responses)+random.choice(responses2)+"\n"
+        return random.choice(responses)+"\n"+random.choice(responses2)+"\n"
 
 Alienbot=Rulebot()
 Alienbot.greet()
